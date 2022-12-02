@@ -17,7 +17,7 @@ const Login = () => {
       });
 
       if (res.status === 200) {
-        window.location.replace("/main");
+        window.location.replace("main");
         const token = res.data.access_token;
         JSON.localStorage.setItem("token", token);
       }

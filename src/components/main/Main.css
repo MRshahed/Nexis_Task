@@ -89,7 +89,7 @@
     right: 30%;
   }
   .table__content {
-    column-gap: 3rem;
+    column-gap: 1.5rem;
     margin-top: 3rem;
   }
   .main__heading {
