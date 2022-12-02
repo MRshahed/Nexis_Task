@@ -1,25 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Main.css";
 import logo from "../../assets/ultimate hrm logo-05-02 5.png";
 import axios from "axios";
 
 const Main = () => {
+  const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const token = JSON.parse(localStorage.getItem("token"));
+      const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      };
 
       try {
         const res = await axios.get("https://test.nexisltd.com/test", {
-          headers: { Authorization: `Bearer ${token}` },
+          headers,
         });
-        console.log(res);
+        setUserdata([res.data]);
       } catch (err) {
         console.log(err);
       }
     };
-
     fetchData();
   }, []);
+
+  const uName = userdata.flatMap((e) => [e[2], e[4], e[5], e[8], e[10], e[11]]);
+  const Astatus = uName.flatMap((e) => e.attendance["2022-11-01"]);
 
   return (
     <div className="main__container">
@@ -32,42 +40,27 @@ const Main = () => {
           <div className="table__item">
             <h3 className="table__title">Date</h3>
             <ul className="table__item-list">
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
-              <li>Today</li>
+              {uName.map((e) => (
+                <li key={e.id}>2022-11-01</li>
+              ))}
             </ul>
           </div>
 
           <div className="table__item">
             <h3 className="table__title">Employee Name</h3>
             <ul className="table__item-list">
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
-              <li>Shahed</li>
+              {uName.map((e) => (
+                <li key={e.id}>{e.name}</li>
+              ))}
             </ul>
           </div>
 
           <div className="table__item">
             <h3 className="table__title">Status</h3>
             <ul className="table__item-list">
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
-              <li>Present</li>
+              {Astatus.map((e) => (
+                <li>{e.status}</li>
+              ))}
             </ul>
           </div>
         </div>

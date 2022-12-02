@@ -35,7 +35,7 @@ const Login = () => {
     <div className="section__container">
       <Home />
       <form className="login__container">
-        <div className="login__content">
+        <div className="login__content regi__content">
           <h1 className="login__title">SignUp Form</h1>
           <div className="login__input">
             <input
