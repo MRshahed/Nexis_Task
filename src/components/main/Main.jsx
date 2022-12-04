@@ -26,7 +26,6 @@ const Main = () => {
     fetchData();
     // window.localStorage.clear();
   }, []);
-  console.log(userdata);
 
   const uName = userdata.flatMap((e) => [e[2], e[4], e[5], e[8], e[10], e[11]]);
   const Astatus = uName.flatMap((e) => e.attendance["2022-11-01"]);
