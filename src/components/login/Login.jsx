@@ -9,6 +9,7 @@ const Login = () => {
   const passRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    window.localStorage.clear();
 
     try {
       const res = await axios.post("https://test.nexisltd.com/login", {

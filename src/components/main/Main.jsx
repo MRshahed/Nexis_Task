@@ -25,9 +25,10 @@ const Main = () => {
     };
     fetchData();
   }, []);
-  // window.localStorage.clear();
-  const uName = userdata.flatMap((e) => [e[2], e[4], e[5], e[8], e[10], e[11]]);
-  const Astatus = uName.flatMap((e, index, arr) => e.attendance["2022-11-02"]);
+
+  const keyData = [...userdata].flatMap((e) => Object.values(e));
+  const Attendancestatus = keyData.flatMap((e) => e.attendance["2022-11-02"]);
+
   return (
     <div className="main__container">
       <div className="main__content">
@@ -39,8 +40,8 @@ const Main = () => {
           <div className="table__item">
             <h3 className="table__title">Date</h3>
             <ul className="table__item-list">
-              {uName.map((e) => (
-                <li key={e.id}>2022-11-02</li>
+              {Attendancestatus.map((e) => (
+                <li key={e.times}>2022-11-02</li>
               ))}
             </ul>
           </div>
@@ -48,7 +49,7 @@ const Main = () => {
           <div className="table__item">
             <h3 className="table__title">Employee Name</h3>
             <ul className="table__item-list">
-              {uName.map((e) => (
+              {keyData.map((e) => (
                 <li key={e.id}>{e.name}</li>
               ))}
             </ul>
@@ -57,8 +58,8 @@ const Main = () => {
           <div className="table__item">
             <h3 className="table__title">Status</h3>
             <ul className="table__item-list">
-              {Astatus.map((e) => (
-                <li>{e.status}</li>
+              {Attendancestatus.map((e) => (
+                <li key={e.times + 1}>{e.status}</li>
               ))}
             </ul>
           </div>
