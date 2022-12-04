@@ -7,7 +7,7 @@ const Main = () => {
   const [userdata, setUserdata] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const token = JSON.parse(localStorage.getItem("token"));
+      const token = window.localStorage.getItem("token");
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -24,7 +24,9 @@ const Main = () => {
       }
     };
     fetchData();
+    // window.localStorage.clear();
   }, []);
+  console.log(userdata);
 
   const uName = userdata.flatMap((e) => [e[2], e[4], e[5], e[8], e[10], e[11]]);
   const Astatus = uName.flatMap((e) => e.attendance["2022-11-01"]);
