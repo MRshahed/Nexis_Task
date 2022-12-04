@@ -20,7 +20,6 @@ const Login = () => {
         window.location.replace("/main");
         const token = res.data.access_token;
         window.localStorage.setItem("token", token);
-        console.log(token);
       }
     } catch (err) {
       console.log(err);
